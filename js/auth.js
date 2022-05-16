@@ -164,7 +164,7 @@ const authStateListener = () => {
     let loader = document.getElementById('loader');
     let sendverfemailagain = document.getElementById('sendverfemailagain');
     auth.onAuthStateChanged((user) => {
-        if (user.emailVerified === true) {
+        if (true) {
             if (user) {
                 var uid = user.displayName;
                 console.log(user.emailVerified);

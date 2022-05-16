@@ -1,3 +1,4 @@
+var FM57964 = "yIKglGdcWnPb9wN45zjL"
 const navbar = () => {
     const shopNameNav = document.getElementById('shopNameNav');
     auth.onAuthStateChanged((res) => {
@@ -20,7 +21,7 @@ const pendingtab = () => {
     let pending = document.getElementById('pending');
 
     auth.onAuthStateChanged((res) => {
-        db.collection("orders").where("resturantid", "==", res.uid).where("watch", "==", "Pending")
+        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Pending")
             .onSnapshot((querySnapshot) => {
                 if (querySnapshot.empty) {
                     pending.innerHTML = `<h3 class="text-center pt-4">No PendingOrder Yet, Add Exiciting Deals For More Sells</h3>`;
@@ -29,13 +30,22 @@ const pendingtab = () => {
                 else {
                     var orders = [];
                     querySnapshot.forEach((doc) => {
-                        orders.unshift(`<div>${doc.data().items}</div>` +
-                            `<b id="itemtext">Total: ${doc.data().total}</b>` +
-                            `<input type="hidden" id="pp${doc.data().orderid}" value="${doc.data().orderid}>" +
-                            <div><br></div>` +
-                            `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                            `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div><div><b>Phone #:</b> ${doc.data().customerPhone}</div><div><b>Date: </b>${doc.data().date} <b>Time: </b>${doc.data().time}</div><div><b>Address:</b> ${doc.data().customerAddress}</div><div><button class="btn btn-success no-radius" onclick="accept(${doc.data().orderid})">Accept</button> <button class="btn btn-danger no-radius" onclick="reject(${doc.data().orderid})">Reject</button></div></div> <div class="col-md-6"><iframe class="iframeClass" src="https://maps.google.co.uk/?q=${doc.data().latitude},${doc.data().longitude}&z=16&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div>` +
-                            `<hr>`);
+                    
+                        var orderName=""
+                        for(let item of doc.data().items){
+                            orderName+=" "+item["quantity"]+" "+item["itemName"]
+                        } 
+                        bok = doc.id
+                        orders.unshift(`<div>${orderName}</div>` +
+                        `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +
+                        `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
+                        `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                        <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
+                        <b>Time: </b>${doc.data().time}</div>
+                        <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
+                        ><div><button class="btn btn-success no-radius" onclick="accept('${bok}')">Accept</button> 
+                        <button class="btn btn-danger no-radius" onclick="reject('${bok}')">Reject</button></div></div></div>` +
+                        `<hr>`);
                     });
                     pending.innerHTML = orders.join(" ")
                     loader.style.display = "none"
@@ -48,17 +58,26 @@ const acceptedtab = () => {
     let accepted = document.getElementById('accepted');
 
     auth.onAuthStateChanged((res) => {
-        db.collection("orders").where("resturantid", "==", res.uid).where("watch", "==", "Accept")
+        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Accept")
             .onSnapshot((querySnapshot) => {
                 var orders = [];
                 querySnapshot.forEach((doc) => {
-                    orders.unshift(`<div>${doc.data().items}</div>` +
-                        `<b>Total: ${doc.data().total}</b>` +
-                        `<input type="hidden" id="pp${doc.data().orderid}" value="${doc.data().orderid}>" +
-                        <div><br></div>` +
-                        `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                        `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div><div><b>Phone #:</b> ${doc.data().customerPhone}</div><div><b>Date: </b>${doc.data().date} <b>Time: </b>${doc.data().time}</div><div><b>Address:</b> ${doc.data().customerAddress}</div><div><button class="btn btn-success no-radius" onclick="deliver(${doc.data().orderid})">Deliver</button></div></div> <div class="col-md-6"><iframe class="iframeClass" src="https://maps.google.co.uk/?q=${doc.data().latitude},${doc.data().longitude}&z=16&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div>` +
-                        `<hr>`);
+                    
+                    var orderName=""
+                    for(let item of doc.data().items){
+                        orderName+=" "+item["quantity"]+" "+item["itemName"]
+                    } 
+                    bok = doc.id
+                    orders.unshift(`<div>${orderName}</div>` +
+                    `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +                   
+                    `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
+                    `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                    <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
+                    <b>Time: </b>${doc.data().time}</div>
+                    <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
+                    ><div><button class="btn btn-success no-radius" onclick="deliver('${bok}')">Deliver</button> 
+                    </div></div></div>` +
+                    `<hr>`);
                 });
                 accepted.innerHTML = orders.join(" ")
             });
@@ -69,19 +88,25 @@ const deliveredtab = () => {
     let delivered = document.getElementById('delivered');
 
     auth.onAuthStateChanged((res) => {
-        db.collection("orders").where("resturantid", "==", res.uid).where("watch", "==", "Deliver")
+        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Deliver")
             .onSnapshot((querySnapshot) => {
                 var orders = [];
-                querySnapshot.forEach((doc) => {
-                    orders.unshift(`<div>${doc.data().items}</div>` +
-                        `<b>Total: ${doc.data().total} </b>` +
-                        `<input type="hidden" id="pp${doc.data().orderid}" value="${doc.data().orderid}>" + 
-                    <div><br></div>`+
-                        `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                        `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div><div><b>Phone #:</b> ${doc.data().customerPhone}</div><div><b>Date: </b>${doc.data().date} <b>Time: </b>${doc.data().time}</div><div><b>Address:</b> ${doc.data().customerAddress}</div></div> <div class="col-md-6"><iframe class="iframeClass" src="https://maps.google.co.uk/?q=${doc.data().latitude},${doc.data().longitude}&z=16&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div>` +
-                        `<hr>`);
+                querySnapshot.forEach((doc) => {                 
+                    var orderName=""
+                    for(let item of doc.data().items){
+                        orderName+=" "+item["quantity"]+" "+item["itemName"]
+                    } 
+                    bok = doc.id
+                    orders.unshift(`<div>${orderName}</div>` +
+                    `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +
+                    `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
+                    `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                    <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
+                    <b>Time: </b>${doc.data().time}</div>
+                    <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
+                    ><div></div></div></div>` +
+                    `<hr>`);
                 });
-                // console.log(orders);
                 delivered.innerHTML = orders.join(" ")
             });
     })
@@ -89,28 +114,34 @@ const deliveredtab = () => {
 
 const rejectedtab = () => {
     let rejected = document.getElementById('rejected');
-
     auth.onAuthStateChanged((res) => {
-        db.collection("orders").where("resturantid", "==", res.uid).where("watch", "==", "Reject")
+        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Reject")
             .onSnapshot((querySnapshot) => {
                 var orders = [];
-                querySnapshot.forEach((doc) => {
-                    orders.unshift(`<div>${doc.data().items}</div>` +
-                        `<b>Total: ${doc.data().total} </b>` +
-                        `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                        `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div><div><b>Phone #:</b> ${doc.data().customerPhone}</div><div><b>Date: </b>${doc.data().date} <b>Time: </b>${doc.data().time}</div><div><b>Address:</b> ${doc.data().customerAddress}</div></div> <div class="col-md-6"><iframe class="iframeClass" src="https://maps.google.co.uk/?q=${doc.data().latitude},${doc.data().longitude}&z=16&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div>` +
-                        `<hr>`);
+                querySnapshot.forEach((doc) => {                 
+                    var orderName=""
+                    for(let item of doc.data().items){
+                        orderName+=" "+item["quantity"]+" "+item["itemName"]
+                    } 
+                    bok = doc.id
+                    orders.unshift(`<div>${orderName}</div>` +
+                    `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +        
+                    `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
+                    `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                    <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
+                    <b>Time: </b>${doc.data().time}</div>
+                    <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
+                    ><div></div></div></div>` +
+                    `<hr>`);
                 });
                 rejected.innerHTML = orders.join(" ")
             });
     })
 }
 
-// Buttons Function
-
 // //! Accept k lye button
-const accept = (orderid) => {
-    var washingtonRef = db.collection("orders").doc(`${orderid}`);
+const accept = (orderId) => {
+    var washingtonRef = db.collection("orders").doc(`${orderId}`);
     return washingtonRef.update({
         watch: "Accept"
     }).then(() => {
