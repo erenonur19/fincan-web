@@ -21,7 +21,7 @@ body{
     width:250px;
     height:250px;
     border-radius:100%;
-    background: #633333;
+    background: #107CF1;
     -webkit-animation:loader3 1.5s linear infinite;
     animation:loader3 1.5s linear infinite;
  }

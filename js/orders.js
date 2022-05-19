@@ -24,7 +24,7 @@ const pendingtab = () => {
         db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Pending")
             .onSnapshot((querySnapshot) => {
                 if (querySnapshot.empty) {
-                    pending.innerHTML = `<h3 class="text-center pt-4">No PendingOrder Yet, Add Exiciting Deals For More Sells</h3>`;
+                    pending.innerHTML = `<h3 class="text-center pt-4">There are no orders to be listed yet..</h3>`;
                     loader.style.display = "none";
                 }
                 else {
@@ -33,19 +33,30 @@ const pendingtab = () => {
                     
                         var orderName=""
                         for(let item of doc.data().items){
-                            orderName+=" "+item["quantity"]+" "+item["itemName"]
-                        } 
+                            orderName+=" "+item["quantity"]+" pcs. "+item["itemName"] +","
+                        }
+                        orderName = orderName.substring(0, orderName.length - 1); 
                         bok = doc.id
-                        orders.unshift(`<div>${orderName}</div>` +
-                        `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +
-                        `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                        `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                        orders.unshift(`<div class="card">
+                        <div class="card-header">
+                          Order ID: ${bok}
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">${orderName}</h5>
+                          <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
+                          <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                          <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                         <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                         <b>Time: </b>${doc.data().time}</div>
                         <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
                         ><div><button class="btn btn-success no-radius" onclick="accept('${bok}')">Accept</button> 
-                        <button class="btn btn-danger no-radius" onclick="reject('${bok}')">Reject</button></div></div></div>` +
-                        `<hr>`);
+                        <button class="btn btn-danger no-radius" onclick="reject('${bok}')">Reject</button></div></div></div>
+                         
+                        </div>
+                      </div>`
+                        
+                        
+                        );
                     });
                     pending.innerHTML = orders.join(" ")
                     loader.style.display = "none"
