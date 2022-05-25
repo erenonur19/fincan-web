@@ -23,7 +23,7 @@ body {
 
 .nav > .nav-header > .nav-title {
   display: inline-block;
-  color: #6173DF;
+  color: #107cf1;
   padding: 15px 15px 15px 5px;
 }
 
@@ -52,7 +52,7 @@ body {
 
 .nav > .nav-links > a:hover {
   background-color: #ffecfc;
-  color: #6173DF;
+  color: #107cf1;
 }
 
 .nav > #nav-check {
@@ -62,7 +62,7 @@ body {
 .nav-icon{
     font-size: 20px;
     padding: 0px 10px 0px 0px !important;
-    color: #6173DF;
+    color: #107cf1;
     font-weight: bold;
   text-align: center;
 
@@ -85,7 +85,7 @@ body {
 }
 
 .nav-bottom .add-button {
-  background-color: #6173DF;
+  background-color: #107cf1;
   padding: 10px;
   cursor: pointer;
   font-size: 15px;
@@ -127,7 +127,7 @@ body {
 
 .dropdown-content-nav a:hover {
   background-color: rgba(245, 245, 245, 0.817);
-  color: #6173DF;
+  color: #107cf1;
 }
 
 .dropdown-nav:hover .dropdown-content-nav {

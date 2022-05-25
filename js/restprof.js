@@ -19,7 +19,7 @@ const uploadImage = () => {
 }
 
 const uploadImageFirestore = (url, res) => {
-    var resRef = db.collection("resturant").doc(res.uid);
+    var resRef = db.collection("restaurant").doc(res.uid);
     resRef.update({
         imageurl: url
     })

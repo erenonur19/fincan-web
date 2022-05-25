@@ -24,8 +24,10 @@ body {
 
 .button-style{
   width: 100% !important;
-  background: #6173DF !important;
-  border: #6173DF !important;
+  background: #107cf1
+  !important;
+  border: #107cf1
+  !important;
   height: 46px;
   font-size: 14px;
   letter-spacing: 1px;
@@ -34,17 +36,19 @@ body {
   transition: all .2s cubic-bezier(.25,.46,.45,.94);
 }
 .button-style:hover{
-  background: #919ee6 !important;
-  border: #6173DF !important;
+  background: #5c71e9 !important;
+  border: #107cf1
+  !important;
 }
 
 .link-style{
-  color: #6173DF !important;
+  color: #107cf1
+  !important;
   text-decoration: none;
 }
 
 .link-style:hover{
-  color: #919ee6 ;
+  color: #5c71e9;
 }
 
 
