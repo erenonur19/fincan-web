@@ -115,15 +115,23 @@ const deliveredtab = () => {
                         orderName+=" "+item["quantity"]+" "+item["itemName"]
                     } 
                     bok = doc.id
-                    orders.unshift(`<div>${orderName}</div>` +
-                    `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +
-                    `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                    `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                    orders.unshift(`<div class="card">
+                    <div class="card-header">
+                      Order ID: ${bok}
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">${orderName}</h5>
+                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
+                      <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                      <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                     <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                     <b>Time: </b>${doc.data().time}</div>
                     <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
-                    ><div></div></div></div>` +
-                    `<hr>`);
+                    ><div> 
+                    </div></div></div>
+                     
+                    </div>
+                  </div>`);
                 });
                 delivered.innerHTML = orders.join(" ")
             });
@@ -142,15 +150,23 @@ const rejectedtab = () => {
                         orderName+=" "+item["quantity"]+" "+item["itemName"]
                     } 
                     bok = doc.id
-                    orders.unshift(`<div>${orderName}</div>` +
-                    `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +        
-                    `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                    `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                    orders.unshift(`<div class="card">
+                    <div class="card-header">
+                      Order ID: ${bok}
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">${orderName}</h5>
+                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
+                      <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                      <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                     <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                     <b>Time: </b>${doc.data().time}</div>
                     <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
-                    ><div></div></div></div>` +
-                    `<hr>`);
+                    ><div> 
+                    </div></div></div>
+                     
+                    </div>
+                  </div>`);
                 });
                 rejected.innerHTML = orders.join(" ")
             });
