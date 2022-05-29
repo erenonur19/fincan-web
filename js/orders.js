@@ -69,7 +69,7 @@ const acceptedtab = () => {
     let accepted = document.getElementById('accepted');
 
     auth.onAuthStateChanged((res) => {
-        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Accept")
+        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Accepted")
             .onSnapshot((querySnapshot) => {
                 var orders = [];
                 querySnapshot.forEach((doc) => {
@@ -79,16 +79,23 @@ const acceptedtab = () => {
                         orderName+=" "+item["quantity"]+" "+item["itemName"]
                     } 
                     bok = doc.id
-                    orders.unshift(`<div>${orderName}</div>` +
-                    `<b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>` +                   
-                    `<div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>` +
-                    `<div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
+                    orders.unshift(`<div class="card">
+                    <div class="card-header">
+                      Order ID: ${bok}
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">${orderName}</h5>
+                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
+                      <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                      <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                     <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                     <b>Time: </b>${doc.data().time}</div>
                     <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
                     ><div><button class="btn btn-success no-radius" onclick="deliver('${bok}')">Deliver</button> 
-                    </div></div></div>` +
-                    `<hr>`);
+                    </div></div></div>
+                     
+                    </div>
+                  </div>`);
                 });
                 accepted.innerHTML = orders.join(" ")
             });
@@ -99,7 +106,7 @@ const deliveredtab = () => {
     let delivered = document.getElementById('delivered');
 
     auth.onAuthStateChanged((res) => {
-        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Deliver")
+        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Delivered")
             .onSnapshot((querySnapshot) => {
                 var orders = [];
                 querySnapshot.forEach((doc) => {                 
@@ -126,7 +133,7 @@ const deliveredtab = () => {
 const rejectedtab = () => {
     let rejected = document.getElementById('rejected');
     auth.onAuthStateChanged((res) => {
-        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Reject")
+        db.collection("orders").where("restaurantId", "==", res.uid).where("watch", "==", "Rejected")
             .onSnapshot((querySnapshot) => {
                 var orders = [];
                 querySnapshot.forEach((doc) => {                 
@@ -154,7 +161,7 @@ const rejectedtab = () => {
 const accept = (orderId) => {
     var washingtonRef = db.collection("orders").doc(`${orderId}`);
     return washingtonRef.update({
-        watch: "Accept"
+        watch: "Accepted"
     }).then(() => {
         console.log("Document successfully updated!");
     }).catch((error) => {
@@ -166,7 +173,7 @@ const accept = (orderId) => {
 const reject = (orderid) => {
     var washingtonRef = db.collection("orders").doc(`${orderid}`);
     return washingtonRef.update({
-        watch: "Reject"
+        watch: "Rejected"
     }).then(() => {
         console.log("Document successfully updated!");
     }).catch((error) => {
@@ -178,7 +185,7 @@ const reject = (orderid) => {
 const deliver = (orderid) => {
     var washingtonRef = db.collection("orders").doc(`${orderid}`);
     return washingtonRef.update({
-        watch: "Deliver"
+        watch: "Delivered"
     }).then(() => {
         console.log("Document successfully updated!");
     }).catch((error) => {
