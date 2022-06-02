@@ -72,7 +72,7 @@ const showItem = () => {
                         <div class="card-body">
                                 <p class="" style="font-size: 25px;"><b>${doc.data().itemname}</b></p>
                             <div class="d-flex justify-content-between">
-                                <p class="" style="font-size: 16px;">PKR: ${doc.data().itemprice}</p>
+                                <p class="" style="font-size: 16px;">TL: ${doc.data().itemprice}</p>
                             </div>
                         </div>
                     </div>
