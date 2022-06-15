@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
@@ -10,12 +10,15 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage-compat.js"></script>
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <!-- Bootstrap V.5.0 -->
+    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/register.css">
-    <link rel="stylesheet" href="./css/loader.css">
     <link rel="icon" href="./img/cofeeicon.png">
     <title>Fincan | Signup</title>
 </head>
@@ -31,7 +34,7 @@
 
     <div class="container background" style="min-height:100vh !important;">
         <form>
-            <section class="h-100">
+            <area class="h-100">
                 <div class="container-fluid py-5">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col-xl-6 bg-transparent-user">
@@ -39,43 +42,44 @@
                                 <h1 class="mb-5 text-capitalize d-flex justify-content-center fw-bold">
                                     <img width="300px" src="./img/lgo2.png" alt="">
                                 </h1>
-                                <h3 class="mb-5 fw-bold">Let's start selling!</h3>
+                                <h2 class="mb-4 text-center">Register to start Selling!</h2>
 
-                                <!-- <div class="row"> -->
-                                <div class="form-outline mb-4">
+                                <div class="form-outline mb-2">
+                                    <label class="form-label" for="signupResName">Cafee Name</label>
                                     <input type="email" id="signupResName" oninput="resSignupValidation()"
                                         class="form-control rounded-0 form-control-lg" autocapitalize="none"
                                         autocorrect="off" required />
-                                    <label class="form-label" for="signupResName">Cafee Name</label>
+                                    
                                     <div class="alert alert-danger alert-dismissible fade show" id="alreadyusername"
                                         style="display: none;" role="alert">
-                                        Username Already Taken, Try another!
+                                        The name you chose is being used, try another!
                                     </div>
                                     <div class="alert alert-danger alert-dismissible fade show" id="spaceusername"
                                         style="display: none;" role="alert">
-                                        Username Can not contain any space!
+                                        Username can not contain any spaces!
                                     </div>
                                 </div>
-                                <!-- </div> -->
 
-                                <div class="form-outline mb-4">
+                                <div class="form-outline mb-2">
+                                    <label class="form-label" for="signupResEmail">Email</label>
                                     <input type="email" id="signupResEmail" oninput="resSignupValidation()"
                                         class="form-control rounded-0 form-control-lg" required />
-                                    <label class="form-label" for="signupResEmail">Email</label>
+                                    
                                 </div>
                                 
                             
-                                <div class="form-outline mb-1">
+                                <div class="form-outline mb-2">
+                                    <label class="form-label" for="MainResImage">Upload Image</label>
                                     <input type="file" class="form-control rounded-0" oninput="resSignupValidation()"
                                         accept="image/png, image/jpeg" id="MainResImage">
-                                    <label class="form-label" for="MainResImage">Upload Image</label>
-                                    <!-- <button class="btn btn-primary" onclick="uploadImage()">Update
-                                                    image</button> -->
+                                    
+
                                 </div>
-                                <div class="form-outline mb-1">
+                                <div class="form-outline mb-2">
+                                    <label class="form-label" for="signupResPassword">Password</label>
                                     <input type="password" id="signupResPassword" oninput="resSignupValidation()"
                                         class="form-control rounded-0 form-control-lg" required />
-                                    <label class="form-label" for="signupResPassword">Password</label>
+                                    
                                 </div>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input shadow-remove" type="checkbox"
@@ -85,7 +89,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     
-                                    <div id="" class="form-text mb-4 text-center pt-4">
+                                    <div id="" class="form-text mb-4 text-center pt-5">
                                         Already have an account? <a class="link-style" href="index.html">Login here</a>
                                     </div>
                                 </div>
@@ -100,20 +104,11 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </area>
         </form>
 
     </div>
-
-
-
-
-
-
-
-
     <script src="./js/auth.js"></script>
-    <script src="./js/sweetalert.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -124,6 +119,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>

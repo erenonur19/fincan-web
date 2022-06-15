@@ -1,20 +1,5 @@
-
-
-// const auth = firebaseApp.auth();
-// const db = firebaseApp.firestore();
-
-// auth.onAuthStateChanged((user) => {
-//     if (user) {
-//         console.log(user);
-//         // console.log(user.uid);
-//     } else {
-//         console.log("User Logged Out");
-//     }
-// });
-
 const addItem = () => {
     loader.style.display = "block"
-    // Storage
     const ref = storage.ref('resturantItems');
     let file = document.getElementById('resFoodImage').files[0];
     let date = new Date;
@@ -93,7 +78,7 @@ const navbar = () => {
         docRef.get().then((doc) => {
             if (doc.exists) {
                 const shopname = doc.data().name; namehalf = shopname.substring(0, 14)
-                shopNameNav.innerHTML = `${namehalf}....`;
+                shopNameNav.innerHTML = `${namehalf}`;
             } else { console.log("No such document!"); }
         }).catch((error) => { console.log("Error getting document:", error); alert(error) });
     })
@@ -101,7 +86,6 @@ const navbar = () => {
 
 const deleteItem = (id, imagename) => {
     loader.style.display = "block";
-    // Delete item form firestore
     db.collection("items").doc(`${id}`).delete().then(() => {
         console.log("Document successfully deleted!");
         loader.style.display = "none";
@@ -110,7 +94,6 @@ const deleteItem = (id, imagename) => {
         alert(error);
     });
 
-    // Delete image from storage
     const desertRef = storage.ref('resturantItems').child(imagename);
     desertRef.delete().then(() => {
         console.log("succes delete");
@@ -120,30 +103,4 @@ const deleteItem = (id, imagename) => {
 
 const editItem = (id) => {
     console.log(id);
-    // var editItem = db.collection("orders").doc(`${id}`);
-
-    // // Set the "capital" field of the city 'DC'
-    // return washingtonRef.update({
-    //     capital: true
-    // })
-    //     .then(() => {
-    //         console.log("Document successfully updated!");
-    //     })
-    //     .catch((error) => {
-    //         // The document probably doesn't exist.
-    //         console.error("Error updating document: ", error);
-    //     });
 }
-
-//? for show and hide input in onchange
-// const freeOrpaid = () => {
-//     let resDeliveryType = document.getElementById('resDeliveryType').value, delvcharginp = document.getElementById('delvcharginp'), delvcharlab = document.getElementById('delvcharlab');
-
-//     if (resDeliveryType == "Paid") {
-//         delvcharginp.style.display = "block"
-//         delvcharlab.style.display = "block"
-//     } else {
-//         delvcharginp.style.display = "none"
-//         delvcharlab.style.display = "none"
-//     }
-// }

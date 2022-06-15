@@ -1,3 +1,4 @@
+//db connection
 const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyDjLb585R1Cx_tlxbZ--XIqrQeeVcXaJ5U",
     authDomain: "fincan-60676.firebaseapp.com",
@@ -12,14 +13,6 @@ const auth = firebaseApp.auth();
 const db = firebaseApp.firestore();
 const storage = firebaseApp.storage();
 
-// auth.onAuthStateChanged((user) => {
-//     if (user) {
-//         console.log(user, "user Loged In");
-//     } else {
-//         console.log("User Logged Out");
-//     }
-// });
-
 function showsignuppassword() {
     var signupResPassword = document.getElementById("signupResPassword");
 
@@ -29,7 +22,7 @@ function showsignuppassword() {
         signupResPassword.type = "password";
     }
 }
-// Show Login Password
+
 function showloginpassword() {
     var loginpassword = document.getElementById("loginpassword")
     if (loginpassword.type === "password") {
@@ -56,7 +49,7 @@ const validationLogin = () => {
     let loginnameoremail = document.getElementById('loginnameoremail').value;
     let loginpassword = document.getElementById('loginpassword').value;
     let loginBtn = document.getElementById('loginBtn');
-    if ((loginnameoremail && loginpassword).length === 0) {
+    if ((loginnameoremail && loginpassword).length === 5) {
         loginBtn.disabled = true;
     } else {
         loginBtn.disabled = false;
@@ -67,14 +60,14 @@ const validationForget = () => {
     let forgetInput = document.getElementById('forgetInput').value;
     let sendForgetlinkBtn = document.getElementById('sendForgetlinkBtn');
 
-    if (forgetInput.length === 0) {
+    if (forgetInput.length === 5) {
         sendForgetlinkBtn.disabled = true;
     } else {
         sendForgetlinkBtn.disabled = false;
     }
 }
 
-// SignUp As Resturant
+// Sign UP
 const resturantSignUp = () => {
     let loader = document.getElementById('loader');
 
@@ -90,11 +83,9 @@ const resturantSignUp = () => {
             sendEmailVerification();
         })
         .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage);
+            console.log(error.message);
             loader.style.display = "none";
-            swal(errorMessage);
+            swal(error.message);
         });
 }
 
@@ -149,14 +140,11 @@ const login = () => {
     auth.signInWithEmailAndPassword(loginnameoremail, loginpassword)
         .then((userCredential) => {
             var user = userCredential.user;
-            // console.log(user.uid);
             authStateListener();
         })
         .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
             loader.style.display = "none";
-            swal(errorMessage);
+            swal(error.message);
         });
 }
 
@@ -173,6 +161,8 @@ const authStateListener = () => {
                 console.log("no user");
             }
         } else {
+
+            //email verification-disabled
             loader.style.display = "none"
             swal("Please verify your email address, Go on your given email and click on the given link. If you did not receive any Email Click on SEND EMAIL VERIFICATION to receive an email");
             sendverfemailagain.style.display = "block";
@@ -188,13 +178,11 @@ const typeCheck = (user) => {
             var resdocRef = db.collection("resturant").doc(user.uid);
             resdocRef.get().then((ressnapshot) => {
                 if (ressnapshot.data().type == "resturant") {
-                    // console.log("resturant mil gya");
-                    window.location.href = "./restDash.html";
+                    window.location.href = "./cafeDash.html";
                     loader.style.display = "none"
                 }
             });
         } else if (usersnapshot.data().type == "user") {
-            // console.log("user found", usersnapshot.data());
             window.location.href = "./userhome.html"
             loader.style.display = "none"
         }
@@ -206,12 +194,10 @@ const logout = () => {
 
     loader.style.display = "block"
     auth.signOut().then(() => {
-        // Sign-out successful.
         console.log("Sign-out successful.");
         loader.style.display = "none";
         window.location.href = "./index.html"
     }).catch((error) => {
-        // An error happened.
         console.log(error);
         loader.style.display = "none"
     });
@@ -225,21 +211,16 @@ const forgetpassword = () => {
     auth.sendPasswordResetEmail(email)
         .then(() => {
             console.log("Password reset email sent!");
-            // window.location.href = "./index.html"
             loader.style.display = "none";
             swal("Password reset email sent!");
             document.getElementById('forgetInput').value = "";
         })
         .catch((error) => {
             loader.style.display = "none";
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorMessage);
-            swal(errorMessage)
+            console.log(error.message);
+            swal(error.message)
         });
 }
-
-// Image upload
 
 const uploadImageSignup = (res) => {
     let loader = document.getElementById('loader');

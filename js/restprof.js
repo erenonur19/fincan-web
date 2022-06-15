@@ -47,12 +47,12 @@ const profileDataShow = () => {
         resRef.onSnapshot((doc) => {
             resName.innerHTML = doc.data().name;
             if (doc.data().address == "") {
-                console.log("khali he");
+                console.log("+");
             } else {
                 resAddr.innerHTML = doc.data().address;
             }
             if (doc.data().phonenumber == "") {
-                console.log("Empty phone");
+                console.log("+");
             } else {
                 resPhone.innerHTML = doc.data().phonenumber;
             }
@@ -130,7 +130,6 @@ const getResDeal = () => {
 
 const getResDelvCharg = () => {
     auth.onAuthStateChanged((res) => {
-        // modalInp.type = "number";
         var resRef = db.collection("resturant").doc(res.uid);
         resRef.onSnapshot((doc) => {
             modalInp.value = doc.data().deliverycharges;
@@ -139,7 +138,6 @@ const getResDelvCharg = () => {
     modalInp.disabled = false; updateNamebtn.style.display = "none"; updateAddbtn.style.display = "none"; updatePhonebtn.style.display = "none"; addDealbtn.style.display = "none"; dealoption.style.display = "none"; dealnumber.style.display = "none"; addDelvChargbtn.style.display = "block"
 }
 
-// Update Buttons
 
 const updateName = () => {
     auth.onAuthStateChanged((res) => {

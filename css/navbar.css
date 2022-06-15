@@ -3,7 +3,7 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif,  Arial;
 }
 
 .nav {
@@ -42,7 +42,6 @@ body {
 .nav > .nav-links > a {
   display: inline-block;
   padding: 15px 30px 12px 30px;
-  /* margin-top: 4px; */
   text-decoration: none;
   color: #000000;
   border-left: 1px solid rgba(0, 0, 0, 0.082);
@@ -68,7 +67,6 @@ body {
 
 }
 
-/* Nav Bottom */
 
 .nav-bottom {
   width: 100%;
@@ -92,9 +90,6 @@ body {
 }
 
 
-/* Drop Down  for navbar*/
-
-
 .dropdown-nav {
   position: relative;
   display: inline-block;
@@ -102,15 +97,13 @@ body {
 }
 
 .dropdown-content-nav {
-
   position: absolute;
-  background-color: white;
   margin-top: 15px;
   min-width: 150px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
+  box-shadow: 0px 8px 16px 0px rgba(20, 19, 19, 0.2);
   z-index: 1;
   right: 0;
-
   max-height: 0;
   overflow: hidden;
   -webkit-transition: max-height 0.2s ease-in;
@@ -118,15 +111,15 @@ body {
 }
 
 .dropdown-content-nav a {
-  color: black;
+  color: #000000;
   padding: 16px 20px;
   text-decoration: none;
   display: block;
-  color: black;
+  color: #000000;
 }
 
 .dropdown-content-nav a:hover {
-  background-color: rgba(245, 245, 245, 0.817);
+  background-color: rgba(245, 238, 238, 0.817);
   color: #107cf1;
 }
 
@@ -136,9 +129,6 @@ body {
   -webkit-transition: max-height 0.2s ease-in;
   transition: max-height 0.2s ease-in;
 }
-
-
-/* Responsivness Work */
 
 @media (max-width: 600px) {
   .nav > .nav-btn {
@@ -187,9 +177,6 @@ body {
   }
 }
 
-
-/* for removing bootstrap border on focous */
-
 .shadow-remove:focus {
   border: 0px !important;
   box-shadow: none !important;
@@ -216,5 +203,40 @@ body {
 
 .addshadow{
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.loader3 {
+  position: fixed;
+  width:105vw;
+  height:105vh;
+  display:flex;
+  text-align:left;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  padding:0px;
+  background-color: #FFFFFF;
+}
+.loader3 span {
+  position:absolute;
+  display:inline-block;
+  width:260px;
+  height:260px;
+  border-radius:95%;
+  background: #107CF1;
+  -webkit-animation:loader3 1.7s linear infinite;
+  animation:loader3 1.7s linear infinite;
+}
+.loader3 span:last-child {
+  animation-delay:-0.9s;
+  -webkit-animation-delay:-0.9s;
+}
+@keyframes loader3 {
+  0% {transform: scale(0, 0);opacity:0.8;}
+  100% {transform: scale(1, 1);opacity:0;}
+}
+@-webkit-keyframes loader3 {
+  0% {-webkit-transform: scale(0, 0);opacity:0.8;}
+  100% {-webkit-transform: scale(1, 1);opacity:0;}
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
@@ -11,14 +11,13 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage-compat.js"></script>
 
-    <!-- Bootstrap icon -->
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <!-- Css Styling -->
     <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/loader.css">
     <link rel="stylesheet" href="./css/orders.css">
-    <link rel="stylesheet" href="./css/restaurantDash.css">
-    <!-- Bootstrap v.5.0 -->
+    <link rel="stylesheet" href="./css/cafeDash.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
         <link rel="icon" href="./img/cofeeicon.png">
@@ -35,12 +34,12 @@
 
         </div>
     </div>
-    <!-- Navbar -->
+
     <div class="nav">
         <input type="checkbox" id="nav-check">
         <div class="nav-header">
             <div class="nav-title">
-                <img src="./img/lgo2.png" width="190px" alt="" srcset="">
+                <img src="./img/lgo2.png" width="190px" alt="fincan logo" srcset="">
             </div>
         </div>
         <div class="nav-btn">
@@ -54,10 +53,9 @@
         <div class="nav-links">
             <div class="dropdown-nav">
                 <span id="shopNameNav"></span>
-                <i class="bi bi-person-circle nav-icon"></i>
+                <i style="color:#246edd;" class="bi bi-caret-down-fill"></i>
                 <div class="dropdown-content-nav">
-                    <!-- <a href="#" onclick="">My orders</a> -->
-                    <a href="./restDash.html">Home</a>
+                    <a href="./cafeDash.html">Home</a>
                     <a href="./profile.html" onclick="">Profile</a>
                     <a href="#" onclick="logout()">Logout</a>
                 </div>
@@ -69,8 +67,6 @@
         </div>
     </div>
 
-
-    <!-- Tabs -->
     <div class="page-content">
 
         <div class="tabbed">
@@ -112,10 +108,7 @@
     <script src="./js/orders.js"></script>
     <script src="./js/auth.js"></script>
     <script src="./js/orders.js"></script>
-    <script src="./js/sweetalert.min.js"></script>
 
-    <!-- <script src="./js/resturantDash.js"></script> -->
-    <!-- Bootstrap v.5.0 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

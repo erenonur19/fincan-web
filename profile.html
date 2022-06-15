@@ -11,13 +11,11 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage-compat.js"></script>
 
-    <!-- Bootstrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <!-- Css Styling -->
+
     <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/restaurantDash.css">
-    <link rel="stylesheet" href="./css/loader.css">
-    <!-- Bootstrap v.5.0 -->
+    <link rel="stylesheet" href="./css/cafeDash.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
         <link rel="icon" href="./img/cofeeicon.png">
@@ -30,12 +28,12 @@
 </head>
 
 <body onload="navbar(); profileDataShow();">
-    <!-- Navbar -->
+
     <div class="nav">
         <input type="checkbox" id="nav-check">
         <div class="nav-header">
             <div class="nav-title">
-                <img src="./img/lgo2.png" width="190px" alt="" srcset="">
+                <img src="./img/lgo2.png" width="190px" alt="fincan logo" srcset="">
             </div>
         </div>
         <div class="nav-btn">
@@ -49,13 +47,11 @@
         <div class="nav-links">
             <div class="dropdown-nav">
                 <span id="shopNameNav"></span>
-                <i class="bi bi-person-circle nav-icon"></i>
+                <i style="color:#246edd;" class="bi bi-caret-down-fill"></i>
                 <div class="dropdown-content-nav">
-                    <!-- <a href="#" onclick="">My orders</a> -->
                     <a href="./restDash.html" onclick="">Home</a>
                     <a href="orders.html">Orders</a>
-                    <a href="#" onclick="logout()">Logout</a>
-                    
+                    <a href="#" onclick="logout()">Logout</a>                   
                 </div>
             </div>
 
@@ -73,35 +69,35 @@
         <h1 class="text-center pt-3">Cafee Profile</h1>
         <h5 class="">Cafee Name
             <span data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getResName()">
-                <i class="bi bi-pencil-fill" style="font-size: 16px;"></i>
+                <i class="bi bi-pen"></i>
             </span>
         </h5>
         <p id="resName"></p>
 
         <h5>Address
             <span data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getResAdress()">
-                <i class="bi bi-pencil-fill" style="font-size: 16px;"></i>
+                <i class="bi bi-pen"></i>
             </span>
         </h5>
         <p id="resAddr">Add Address Of Your Cafee</p>
 
         <h5>Phone Number
             <span data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getResPhone()">
-                <i class="bi bi-pencil-fill" style="font-size: 16px;"></i>
+                <i class="bi bi-pen"></i>
             </span>
         </h5>
         <p id="resPhone">You Dont Have any Phone Number</p>
 
         <h5>Any Deal or Discount
             <span data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getResDeal()">
-                <i class="bi bi-pencil-fill" style="font-size: 16px;"></i>
+                <i class="bi bi-pen"></i>
             </span>
         </h5>
         <p id="resDeal">Add Biggest Deal On Your Store For More Coustomer</p>
 
         <h5>Delivey Charges
             <span data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getResDelvCharg()">
-                <i class="bi bi-pencil-fill" style="font-size: 16px;"></i>
+                <i class="bi bi-pen"></i>
             </span>
         </h5>
         <p id="resDelivcharg">Add Delivery Charges <b> (Default Free)</b></p>
@@ -114,12 +110,6 @@
         </div>
     </div>
 
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button> -->
-
-    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -130,11 +120,10 @@
                 <div class="modal-body">
                     <div class="form-outline">
                         <label for="resProfileEditModal" class="form-label"></label>
-                        <input placeholder="Current Deal show here" type="text" class="form-control shadow-remove borderradius-remove"
+                        <input placeholder="Enter your phone number" type="text" class="form-control shadow-remove borderradius-remove"
                             id="resProfileEditModal" aria-describedby="emailHelp">
                     </div>
                     <div class="form-outline pt-4">
-                        <!-- <label for="dealoption" class="form-label">Add Deal</label> -->
                         <select id="dealoption" class="form-select shadow-remove borderradius-remove"
                             aria-label="Default select example">
                             <option value="">None</option>
@@ -175,12 +164,12 @@
 
 
     <script src="./js/auth.js"></script>
-    <script src="./js/restaurantDash.js"></script>
+    <script src="./js/cafeDash.js"></script>
     <script src="./js/restprof.js"></script>
-    <script src="./js/sweetalert.min.js"></script>
 
 
-    <!-- Bootstrap v.5.0 -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

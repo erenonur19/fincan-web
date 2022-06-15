@@ -6,7 +6,7 @@ const navbar = () => {
         docRef.get().then((doc) => {
             if (doc.exists) {
                 const shopname = doc.data().name; namehalf = shopname.substring(0, 14)
-                shopNameNav.innerHTML = `${namehalf}....`;
+                shopNameNav.innerHTML = `${namehalf}`;
             } else { console.log("No such document!"); }
         }).catch((error) => { console.log("Error getting document:", error); alert(error) });
     })
@@ -43,8 +43,8 @@ const pendingtab = () => {
                         </div>
                         <div class="card-body">
                           <h5 class="card-title">${orderName}</h5>
-                          <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
-                          <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                          <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100} TL</b>
+                          <div class="pt-2 orderPerDet"><u><b class="orderDetails">Order Person Detail</b></u></div>
                           <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                         <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                         <b>Time: </b>${doc.data().time}</div>
@@ -85,8 +85,8 @@ const acceptedtab = () => {
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">${orderName}</h5>
-                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
-                      <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100} TL</b>
+                      <div class="pt-2 orderPerDet"><u><b class="orderDetails">Order Person Detail</b></u></div>
                       <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                     <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                     <b>Time: </b>${doc.data().time}</div>
@@ -121,8 +121,8 @@ const deliveredtab = () => {
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">${orderName}</h5>
-                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
-                      <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100} TL</b>
+                      <div class="pt-2 orderPerDet"><u><b class="orderDetails">Order Person Detail</b></u></div>
                       <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                     <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                     <b>Time: </b>${doc.data().time}</div>
@@ -156,8 +156,8 @@ const rejectedtab = () => {
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">${orderName}</h5>
-                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100}</b>
-                      <div class="pt-2 orderPerDet"><u><b class="">Order Person Detail</b></u></div>
+                      <b id="itemtext">Total: ${Math.round(doc.data().subtotalPrice*100)/100} TL</b>
+                      <div class="pt-2 orderPerDet"><u><b class="orderDetails">Order Person Detail</b></u></div>
                       <div class="row pt-2"><div class="col-md-6"><div><b>Name:</b> ${doc.data().customerName}</div>
                     <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                     <b>Time: </b>${doc.data().time}</div>
@@ -173,10 +173,10 @@ const rejectedtab = () => {
     })
 }
 
-// //! Accept k lye button
+
 const accept = (orderId) => {
-    var washingtonRef = db.collection("orders").doc(`${orderId}`);
-    return washingtonRef.update({
+    var orderRef = db.collection("orders").doc(`${orderId}`);
+    return orderRef.update({
         watch: "Accepted"
     }).then(() => {
         console.log("Document successfully updated!");
@@ -187,8 +187,8 @@ const accept = (orderId) => {
 }
 
 const reject = (orderid) => {
-    var washingtonRef = db.collection("orders").doc(`${orderid}`);
-    return washingtonRef.update({
+    var orderRef = db.collection("orders").doc(`${orderid}`);
+    return orderRef.update({
         watch: "Rejected"
     }).then(() => {
         console.log("Document successfully updated!");
@@ -199,8 +199,8 @@ const reject = (orderid) => {
 }
 
 const deliver = (orderid) => {
-    var washingtonRef = db.collection("orders").doc(`${orderid}`);
-    return washingtonRef.update({
+    var orderRef = db.collection("orders").doc(`${orderid}`);
+    return orderRef.update({
         watch: "Delivered"
     }).then(() => {
         console.log("Document successfully updated!");
