@@ -1,6 +1,6 @@
 const addItem = () => {
     loader.style.display = "block"
-    const ref = storage.ref('resturantItems');
+    const ref = storage.ref('caffeeItems');
     let file = document.getElementById('resFoodImage').files[0];
     let date = new Date;
     let name = date.getTime() + '-' + file.name
@@ -74,7 +74,7 @@ const showItem = () => {
 const navbar = () => {
     const shopNameNav = document.getElementById('shopNameNav');
     auth.onAuthStateChanged((res) => {
-        let docRef = db.collection("resturant").doc(res.uid);
+        let docRef = db.collection("caffee").doc(res.uid);
         docRef.get().then((doc) => {
             if (doc.exists) {
                 const shopname = doc.data().name; namehalf = shopname.substring(0, 14)
@@ -94,7 +94,7 @@ const deleteItem = (id, imagename) => {
         alert(error);
     });
 
-    const desertRef = storage.ref('resturantItems').child(imagename);
+    const desertRef = storage.ref('caffeeItems').child(imagename);
     desertRef.delete().then(() => {
         console.log("succes delete");
     }).catch((error) => { console.log(error); });

@@ -1,7 +1,7 @@
 const uploadImage = () => {
     loader.style.display = "block";
     auth.onAuthStateChanged((res) => {
-        const ref = storage.ref('resturantProfile');
+        const ref = storage.ref('caffeeProfile');
         let file = document.getElementById('MainResImage').files[0];
         const metadata = {
             contentType: file.type
@@ -43,7 +43,7 @@ const profileDataShow = () => {
 
 
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         resRef.onSnapshot((doc) => {
             resName.innerHTML = doc.data().name;
             if (doc.data().address == "") {
@@ -88,7 +88,7 @@ let dealnumber = document.getElementById('dealnumber');
 
 const getResName = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         resRef.onSnapshot((doc) => {
             modalInp.value = doc.data().name;
         });
@@ -98,7 +98,7 @@ const getResName = () => {
 
 const getResAdress = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         resRef.onSnapshot((doc) => {
             modalInp.value = doc.data().address;
         });
@@ -109,7 +109,7 @@ const getResAdress = () => {
 
 const getResPhone = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         resRef.onSnapshot((doc) => {
             modalInp.value = doc.data().phonenumber;
         });
@@ -120,7 +120,7 @@ const getResPhone = () => {
 
 const getResDeal = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         resRef.onSnapshot((doc) => {
             modalInp.value = doc.data().deal;
         });
@@ -130,7 +130,7 @@ const getResDeal = () => {
 
 const getResDelvCharg = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         resRef.onSnapshot((doc) => {
             modalInp.value = doc.data().deliverycharges;
         });
@@ -141,7 +141,7 @@ const getResDelvCharg = () => {
 
 const updateName = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         return resRef.update({
             name: modalInp.value,
         })
@@ -156,7 +156,7 @@ const updateName = () => {
 
 const updateAddress = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         return resRef.update({
             address: modalInp.value,
         })
@@ -171,7 +171,7 @@ const updateAddress = () => {
 
 const updateNumber = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         return resRef.update({
             phonenumber: modalInp.value,
         })
@@ -187,7 +187,7 @@ const updateNumber = () => {
 const addDeal = () => {
     var selectedDeal = (dealoption.value + " " + dealnumber.value);
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         return resRef.update({
             deal: selectedDeal,
         })
@@ -202,7 +202,7 @@ const addDeal = () => {
 
 const addDealvcharg = () => {
     auth.onAuthStateChanged((res) => {
-        var resRef = db.collection("resturant").doc(res.uid);
+        var resRef = db.collection("caffee").doc(res.uid);
         return resRef.update({
             deliverycharges: modalInp.value,
         })

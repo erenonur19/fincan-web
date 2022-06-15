@@ -2,7 +2,7 @@ var FM57964 = "yIKglGdcWnPb9wN45zjL"
 const navbar = () => {
     const shopNameNav = document.getElementById('shopNameNav');
     auth.onAuthStateChanged((res) => {
-        let docRef = db.collection("resturant").doc(res.uid);
+        let docRef = db.collection("caffee").doc(res.uid);
         docRef.get().then((doc) => {
             if (doc.exists) {
                 const shopname = doc.data().name; namehalf = shopname.substring(0, 14)
@@ -36,10 +36,10 @@ const pendingtab = () => {
                             orderName+=" "+item["quantity"]+" pcs. "+item["itemName"] +","
                         }
                         orderName = orderName.substring(0, orderName.length - 1); 
-                        bok = doc.id
+                        temp_var = doc.id
                         orders.unshift(`<div class="card">
                         <div class="card-header">
-                          Order ID: ${bok}
+                          Order ID: ${temp_var}
                         </div>
                         <div class="card-body">
                           <h5 class="card-title">${orderName}</h5>
@@ -49,8 +49,8 @@ const pendingtab = () => {
                         <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                         <b>Time: </b>${doc.data().time}</div>
                         <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
-                        ><div><button class="btn btn-success no-radius" onclick="accept('${bok}')">Accept</button> 
-                        <button class="btn btn-danger no-radius" onclick="reject('${bok}')">Reject</button></div></div></div>
+                        ><div><button class="btn btn-success no-radius" onclick="accept('${temp_var}')">Accept</button> 
+                        <button class="btn btn-danger no-radius" onclick="reject('${temp_var}')">Reject</button></div></div></div>
                          
                         </div>
                       </div>`
@@ -78,10 +78,10 @@ const acceptedtab = () => {
                     for(let item of doc.data().items){
                         orderName+=" "+item["quantity"]+" "+item["itemName"]
                     } 
-                    bok = doc.id
+                    temp_var = doc.id
                     orders.unshift(`<div class="card">
                     <div class="card-header">
-                      Order ID: ${bok}
+                      Order ID: ${temp_var}
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">${orderName}</h5>
@@ -91,7 +91,7 @@ const acceptedtab = () => {
                     <div><b>Phone #:</b> ${doc.data().customerPhone}</div>
                     <b>Time: </b>${doc.data().time}</div>
                     <div><b>Payment Method:</b> ${doc.data().paymentMethod}</div
-                    ><div><button class="btn btn-success no-radius" onclick="deliver('${bok}')">Deliver</button> 
+                    ><div><button class="btn btn-success no-radius" onclick="deliver('${temp_var}')">Deliver</button> 
                     </div></div></div>
                      
                     </div>
@@ -114,10 +114,10 @@ const deliveredtab = () => {
                     for(let item of doc.data().items){
                         orderName+=" "+item["quantity"]+" "+item["itemName"]
                     } 
-                    bok = doc.id
+                    temp_var = doc.id
                     orders.unshift(`<div class="card">
                     <div class="card-header">
-                      Order ID: ${bok}
+                      Order ID: ${temp_var}
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">${orderName}</h5>
@@ -149,10 +149,10 @@ const rejectedtab = () => {
                     for(let item of doc.data().items){
                         orderName+=" "+item["quantity"]+" "+item["itemName"]
                     } 
-                    bok = doc.id
+                    temp_var = doc.id
                     orders.unshift(`<div class="card">
                     <div class="card-header">
-                      Order ID: ${bok}
+                      Order ID: ${temp_var}
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">${orderName}</h5>

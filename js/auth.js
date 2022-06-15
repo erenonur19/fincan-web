@@ -68,7 +68,7 @@ const validationForget = () => {
 }
 
 // Sign UP
-const resturantSignUp = () => {
+const caffeeSignUp = () => {
     let loader = document.getElementById('loader');
 
     loader.style.display = "block";
@@ -77,9 +77,9 @@ const resturantSignUp = () => {
 
     auth.createUserWithEmailAndPassword(signupResEmail, signupResPassword)
         .then((userCredential) => {
-            var resturant = userCredential.user;
-            console.log(resturant);
-            setresturantInitialData(resturant);
+            var caffee = userCredential.user;
+            console.log(caffee);
+            setcaffeeInitialData(caffee);
             sendEmailVerification();
         })
         .catch((error) => {
@@ -89,7 +89,7 @@ const resturantSignUp = () => {
         });
 }
 
-const setresturantInitialData = (resturant) => {
+const setcaffeeInitialData = (caffee) => {
     let loader = document.getElementById('loader');
 
     let signupResName = document.getElementById('signupResName').value;
@@ -97,14 +97,14 @@ const setresturantInitialData = (resturant) => {
     let signupResEmail = document.getElementById('signupResEmail').value;
 
 
-    db.collection("resturant").doc(resturant.uid).set({
+    db.collection("caffee").doc(caffee.uid).set({
         email: signupResEmail,
         name: signupResName,
-        type: "resturant",
-        restaurantkey: resturant.uid,
+        type: "caffee",
+        restaurantkey: caffee.uid,
         imageurl: "",
         deal: "No deal",
-        operorclose: "",
+        openorclose: "",
         wrkinghours: "",
         address: "",
         category: "",
@@ -114,7 +114,7 @@ const setresturantInitialData = (resturant) => {
         .then(() => {
             console.log("Document successfully written!");
             loader.style.display = "none"
-            uploadImageSignup(resturant);
+            uploadImageSignup(caffee);
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
@@ -175,9 +175,9 @@ const typeCheck = (user) => {
     var docRef = db.collection("users").doc(user.uid);
     docRef.get().then((usersnapshot) => {
         if (usersnapshot.data() == undefined) {
-            var resdocRef = db.collection("resturant").doc(user.uid);
+            var resdocRef = db.collection("caffee").doc(user.uid);
             resdocRef.get().then((ressnapshot) => {
-                if (ressnapshot.data().type == "resturant") {
+                if (ressnapshot.data().type == "caffee") {
                     window.location.href = "./cafeDash.html";
                     loader.style.display = "none"
                 }
@@ -225,7 +225,7 @@ const forgetpassword = () => {
 const uploadImageSignup = (res) => {
     let loader = document.getElementById('loader');
     loader.style.display = "block";
-    const ref = storage.ref('resturantProfile');
+    const ref = storage.ref('caffeeProfile');
     let file = document.getElementById('MainResImage').files[0];
     const metadata = {
         contentType: file.type
@@ -242,7 +242,7 @@ const uploadImageSignup = (res) => {
 }
 
 const uploadImageFirestoreSignup = (url, res) => {
-    var resRef = db.collection("resturant").doc(res.uid);
+    var resRef = db.collection("caffee").doc(res.uid);
     resRef.update({
         imageurl: url
     })
